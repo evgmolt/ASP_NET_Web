@@ -1,7 +1,10 @@
 ﻿using MvcMovie.Models;
+using MvcMovie.Utilites;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -20,6 +23,50 @@ namespace MvcMovie.Controllers
             ViewBag.Books = books;
             // возвращаем представление
             return View();
+        }
+
+        // асинхронный метод
+        public async Task<ActionResult> BookList()
+        {
+            IEnumerable<Book> books = await db.Books.ToListAsync();
+            ViewBag.Books = books;
+            return View("Index");
+        }
+
+
+        public string GetInfo()
+        {
+            string browser = HttpContext.Request.Browser.Browser;
+            string user_agent = HttpContext.Request.UserAgent;
+            string url = HttpContext.Request.RawUrl;
+            string ip = HttpContext.Request.UserHostAddress;
+            string referrer = HttpContext.Request.UrlReferrer == null ? "" : HttpContext.Request.UrlReferrer.AbsoluteUri;
+            return "<p>Browser: " + browser + "</p><p>User-Agent: " + user_agent + "</p><p>Url запроса: " + url +
+                "</p><p>Реферер: " + referrer + "</p><p>IP-адрес: " + ip + "</p>";
+        }
+
+        public ContentResult Square(int a, int h)
+        {
+            int s = a * h / 2;
+            return Content("<h2>Площадь треугольника с основанием " + a +
+                    " и высотой " + h + " равна " + s + "</h2>");
+        }
+
+        public ViewResult SomeMethod()
+        {
+            ViewBag.Head = "Привет мир!";
+            return View("SomeView");
+        }
+
+        public ActionResult GetImage()
+        {
+            string path = "../Images/visualstudio.png";
+            return new ImageResult(path);
+        }
+
+        public ActionResult GetHtml()
+        {
+            return new HtmlResult("<h2>Привет мир!</h2>");
         }
 
         [HttpGet]

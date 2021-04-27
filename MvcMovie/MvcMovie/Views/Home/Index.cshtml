@@ -1,26 +1,26 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿<!DOCTYPE html>
 
-<!DOCTYPE html>
-
-    <div>
-        <h3>Распродажа книг</h3>
-        <table>
+<div>
+    <h3>Распродажа книг</h3>
+    <table>
+        <tr>
+            <td><p>Название книги</p></td>
+            <td><p>Автор</p></td>
+            <td><p>Цена</p></td>
+            <td></td>
+        </tr>
+        @foreach (var b in ViewBag.Books)
+        {
             <tr>
-                <td><p>Название книги</p></td>
-                <td><p>Автор</p></td>
-                <td><p>Цена</p></td>
-                <td></td>
+                <td><p>@b.Name</p></td>
+                <td><p>@b.Author</p></td>
+                <td><p>@b.Price</p></td>
+                <td><p><a href="/Home/Buy/@b.Id">Купить</a></p></td>
             </tr>
-            @foreach (var b in ViewBag.Books)
-            {
-                <tr>
-                    <td><p>@b.Name</p></td>
-                    <td><p>@b.Author</p></td>
-                    <td><p>@b.Price</p></td>
-                    <td><p><a href="/Home/Buy/@b.Id">Купить</a></p></td>
-                </tr>
-            }
-        </table>
-    </div>
+        }
+    </table>
+</div>
+@section Footer 
+    {
+    Footer 2021.
+    }
