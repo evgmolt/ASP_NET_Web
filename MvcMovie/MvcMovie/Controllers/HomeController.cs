@@ -25,6 +25,12 @@ namespace MvcMovie.Controllers
             return View();
         }
 
+        public ActionResult Partial()
+        {
+            ViewBag.Message = "Это частичное представление.";
+            return PartialView();
+        }
+
         // асинхронный метод
         public async Task<ActionResult> BookList()
         {

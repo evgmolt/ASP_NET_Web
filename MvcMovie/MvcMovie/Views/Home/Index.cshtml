@@ -1,4 +1,14 @@
 ﻿<!DOCTYPE html>
+@using MvcMovie.Helpers
+@helper BookList(IEnumerable<MvcMovie.Models.Book> books)
+{
+    <ul>
+        @foreach (MvcMovie.Models.Book b in books)
+        {
+            <li>@b.Name</li>
+        }
+    </ul>
+}
 
 <div>
     <h3>Распродажа книг</h3>
@@ -19,8 +29,11 @@
             </tr>
         }
     </table>
+    <h3>Список книг</h3>
+    @BookList(ViewBag.Books)
+    @ListHelper.CreateList(Html, new string[] { "Лондон", "Париж", "Берлин" }, new { @class = "btn", id = "citiesList" })
 </div>
-@section Footer 
+@section Footer
     {
     Footer 2021.
-    }
+}
