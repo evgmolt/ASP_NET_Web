@@ -22,7 +22,8 @@ namespace MvcMovie.Controllers
             // передаем все объекты в динамическое свойство Books в ViewBag
             ViewBag.Books = books;
             // возвращаем представление
-            return View();
+
+            return View(db.Books);
         }
 
         public ActionResult Partial()
@@ -75,6 +76,12 @@ namespace MvcMovie.Controllers
             return new HtmlResult("<h2>Привет мир!</h2>");
         }
 
+        public ActionResult BookView(int id)
+        {
+            ViewBag.BookId = id;
+            return View();
+        }
+
         [HttpGet]
         public ActionResult Buy(int id)
         {
@@ -91,6 +98,12 @@ namespace MvcMovie.Controllers
             // сохраняем в бд все изменения
             db.SaveChanges();
             return "Спасибо," + purchase.Person + ", за покупку!";
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

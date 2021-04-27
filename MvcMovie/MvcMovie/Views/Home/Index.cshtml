@@ -13,13 +13,13 @@
 <div>
     <h3>Распродажа книг</h3>
     <table>
-        <tr>
+        <tr class="header">
             <td><p>Название книги</p></td>
             <td><p>Автор</p></td>
             <td><p>Цена</p></td>
             <td></td>
         </tr>
-        @foreach (var b in ViewBag.Books)
+        @foreach (MvcMovie.Models.Book b in Model)
         {
             <tr>
                 <td><p>@b.Name</p></td>
@@ -32,6 +32,12 @@
     <h3>Список книг</h3>
     @BookList(ViewBag.Books)
     @ListHelper.CreateList(Html, new string[] { "Лондон", "Париж", "Берлин" }, new { @class = "btn", id = "citiesList" })
+    @Html.RadioButton("color", "red")
+    <span>красный</span> <br />
+    @Html.RadioButton("color", "blue")
+    <span>синий</span> <br />
+    @Html.RadioButton("color", "green", true)
+    <span>зеленый</span>
 </div>
 @section Footer
     {
